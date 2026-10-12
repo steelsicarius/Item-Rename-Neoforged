@@ -14,9 +14,11 @@ import faewulf.itemrename.command.rename;
 import faewulf.itemrename.command.setLoreLine;
 import faewulf.itemrename.command.unhideEnchant;
 import faewulf.itemrename.command.unlockItem;
+import faewulf.itemrename.gametest.ItemrenameGameTests;
 import faewulf.itemrename.util.permission;
 import net.minecraft.commands.CommandSourceStack;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -30,10 +32,13 @@ public class Itemrename {
     public static final String MODID = "itemrename";
     public static final Logger LOGGER = LoggerFactory.getLogger("item-rename");
 
-    public Itemrename() {
+    public Itemrename(IEventBus modEventBus) {
         // Register ourselves for server and other game events we are interested in,
         // such as command registration and permission node gathering.
         NeoForge.EVENT_BUS.register(this);
+
+        // Register the mod's game tests (only active in a gametest-enabled environment).
+        ItemrenameGameTests.init(modEventBus);
 
         LOGGER.info("Initializing...");
     }

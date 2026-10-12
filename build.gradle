@@ -78,6 +78,9 @@ neoForge {
 
         // applies to all the run configs above
         configureEach {
+            // This test host has IPv6 disabled in the kernel; force IPv4 so the
+            // dev servers can bind their ports (EAFNOSUPPORT otherwise).
+            jvmArgument '-Djava.net.preferIPv4Stack=true'
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
