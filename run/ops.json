@@ -1,0 +1,20 @@
+[
+  {
+    "uuid": "41d4022d-4df5-4273-a9c7-0df55e02302b",
+    "name": "test-mock-player",
+    "level": 1,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "10c045c0-b9bd-489f-bfe4-1df49a1eb2f4",
+    "name": "test-mock-player",
+    "level": 3,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "d70ca3fa-fbf4-4e0f-a700-b96cd41520a4",
+    "name": "test-mock-player",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  }
+]
