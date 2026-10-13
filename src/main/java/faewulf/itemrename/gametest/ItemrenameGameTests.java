@@ -38,7 +38,16 @@ import net.neoforged.neoforge.registries.DeferredRegister;
  * Headless functional tests for the ported commands.
  * <p>
  * Runs under the {@code gameTestServer} run configuration:
- * {@code ./gradlew gameTestServer --tests itemrename:*}
+ * {@code ./gradlew runGameTestServer}
+ * <p>
+ * Notes:
+ * <ul>
+ *   <li>Next to this test, vanilla's built-in {@code minecraft:always_pass} test also runs,
+ *       so the summary reports "2 tests" (1 of this mod + 1 vanilla builtin).</li>
+ *   <li>{@code GameTestHelper#makeMockServerPlayerInLevel} is marked for removal in a future
+ *       version, but it is the only way in 26.1.2 to obtain a {@code ServerPlayer} (with a
+ *       command source) inside a game test.</li>
+ * </ul>
  */
 public class ItemrenameGameTests {
     public static final DeferredRegister<Consumer<GameTestHelper>> TEST_FUNCTIONS =
@@ -94,8 +103,10 @@ public class ItemrenameGameTests {
                     "Command is not registered: /" + name);
         }
 
-        // 2) permission gating
-        // NOTE: the gametest server reports isDedicatedServer() == false, so in this test
+        // 2) create mock players and permission gating
+        // NOTE A: GameTestHelper#makeMockServerPlayerInLevel is marked for removal, but it is
+        // the only way in 26.1.2 to obtain a ServerPlayer (with a command source) in a test.
+        // NOTE B: the gametest server reports isDedicatedServer() == false, so in this test
         // environment the commands use the singleplayer fallback (usable by every player),
         // exactly like the original Fabric mod. The real dedicated-server gating logic
         // (permission nodes with vanilla op-level fallback) is therefore verified directly.

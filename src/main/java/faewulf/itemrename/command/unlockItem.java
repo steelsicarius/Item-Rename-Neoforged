@@ -55,6 +55,7 @@ public class unlockItem {
         ownerCheck.check(player, holding);
 
         //remove tag
+        //set tag
         holding.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY, comp -> comp.update(currentNbt -> {
             currentNbt.remove("itemrename:authorUUID");
             currentNbt.remove("itemrename:authorName");

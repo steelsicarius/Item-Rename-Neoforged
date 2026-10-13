@@ -37,7 +37,9 @@ public class Itemrename {
         // such as command registration and permission node gathering.
         NeoForge.EVENT_BUS.register(this);
 
-        // Register the mod's game tests (only active in a gametest-enabled environment).
+        // Register the mod's game tests. The TEST_FUNCTION registry entry is always
+        // registered (harmless in production); tests are only *executed* in a
+        // gametest-enabled environment (RegisterGameTestsEvent is not fired otherwise).
         ItemrenameGameTests.init(modEventBus);
 
         LOGGER.info("Initializing...");

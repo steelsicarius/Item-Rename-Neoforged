@@ -58,6 +58,16 @@ Custom hex colors are supported with `&#RRGGBB`.
   styles with custom formatting (notably full `&r` reset support). The public vanilla `Style#withXxx` API of 26.1.2
   allows an exact functional replica without any Mixin (`faewulf.itemrename.util.styleEditor`).
 - The mod is server-side safe (no client-only code).
+- Networking: the mod registers no network payloads, so clients without the mod can join a server with it (same as
+  the original). In Minecraft 26.x the server-list indicator is the vanilla `isModded` flag; the old NeoForge
+  `displayTest` metadata field no longer exists, so no extra metadata is required.
+- Permission semantics: like `fabric-permissions-api`, the active permission handler (e.g. LuckPerms) decides the
+  result for a *defined* permission node; for *undefined* nodes the vanilla permission level fallback applies
+  (moderators = level 1, admins = level 3). Explicit grants/denials from the permission manager therefore take
+  precedence over op levels, and setups that only rely on op levels behave exactly like the original.
+- The original had a bug where the second `.requires(...)` call (brigadier overwrites the predicate) silently
+  disabled the `isPlayer` check of the commands; this port combines both checks into one predicate, which was the
+  clear intention of the original code.
 
 ## Building
 
@@ -72,6 +82,11 @@ A headless functional GameTest covers the commands, permissions, locking and tex
 ```
 JAVA_HOME=/usr/java/jdk-25-oracle-aarch64 ./gradlew runGameTestServer
 ```
+
+The dev runs are started with `-Djava.net.preferIPv4Stack=true` (see `build.gradle`), which only affects the
+development JVM: some build/test hosts have IPv6 disabled at kernel level and the dedicated dev server would
+otherwise fail to bind its port. Set it to false in `~/.gradle/gradle.properties` (`devPreferIPv4`) if your
+environment needs IPv6... or simply remove the `jvmArgument` line from `build.gradle`.
 
 ## Feedback and Support
 

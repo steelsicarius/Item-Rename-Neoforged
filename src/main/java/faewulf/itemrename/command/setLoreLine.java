@@ -78,7 +78,7 @@ public class setLoreLine {
         /*
         if (Objects.requireNonNull(Formatting.strip(formatted.getString())).isEmpty()) {
             throw new SimpleCommandExceptionType(
-                    Text.of("Invalid name.")).create();
+                    Text.of("Invalid string.")).create();
         }
         */
 

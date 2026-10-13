@@ -78,9 +78,13 @@ neoForge {
 
         // applies to all the run configs above
         configureEach {
-            // This test host has IPv6 disabled in the kernel; force IPv4 so the
-            // dev servers can bind their ports (EAFNOSUPPORT otherwise).
-            jvmArgument '-Djava.net.preferIPv4Stack=true'
+            // The build/test host of this port has IPv6 disabled at kernel level, which makes the
+            // dev servers fail to bind their ports (EAFNOSUPPORT). Force IPv4 for the development
+            // JVMs only (the built jar is unaffected). Override with -PdevPreferIPv4=false (or
+            // devPreferIPv4=false in ~/.gradle/gradle.properties) on IPv6-native hosts.
+            if (providers.gradleProperty('devPreferIPv4').getOrElse('true').toBoolean()) {
+                jvmArgument '-Djava.net.preferIPv4Stack=true'
+            }
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
