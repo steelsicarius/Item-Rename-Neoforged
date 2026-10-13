@@ -12,6 +12,21 @@ Also you can use my tools to easily make your own custom name/lore: https://faew
 
 Original Fabric mod: https://github.com/FaeWulf/item-rename
 
+## Supported NeoForge versions
+
+This repository contains the same mod built against three NeoForge targets:
+
+| Location         | Minecraft | NeoForge        | Jar                          |
+|------------------|-----------|-----------------|------------------------------|
+| repository root  | 26.1.2    | 26.1.2.114      | item-rename-1.3.2+26.1.2.jar |
+| `neoforge-26.2/` | 26.2      | 26.2.0.90       | item-rename-1.3.2+26.2.jar   |
+| `neoforge-26.3/` | 26.3      | 26.3.0.69-beta  | item-rename-1.3.2+26.3.jar   |
+
+Each directory is a self-contained Gradle project (based on the corresponding ModDevGradle MDK) with identical
+sources; only the version properties in `gradle.properties` differ. Build and test each one from its own
+directory (see below). The sources compile unchanged against the API surface of all three targets (verified
+against the patched sources of each version).
+
 ## Commands and Permissions
 
 | Command                                     | Description                                                   | Permission        |
@@ -71,13 +86,16 @@ Custom hex colors are supported with `&#RRGGBB`.
 
 ## Building
 
+Build the version you want from its directory, e.g. for the 26.1.2 port (repository root):
+
 ```
 JAVA_HOME=/usr/java/jdk-25-oracle-aarch64 ./gradlew build
 ```
 
 ## Testing
 
-A headless functional GameTest covers the commands, permissions, locking and text formatting:
+A headless functional GameTest covers the commands, permissions, locking and text formatting
+(run it from the directory of the version you want to test):
 
 ```
 JAVA_HOME=/usr/java/jdk-25-oracle-aarch64 ./gradlew runGameTestServer
