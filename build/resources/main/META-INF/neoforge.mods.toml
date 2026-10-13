@@ -1,0 +1,54 @@
+# This is the neoforge.mods.toml file of the itemrename mod, ported from Fabric to NeoForge.
+
+# The license for the mod.
+license="CC0-1.0"
+
+# A URL to refer people to when problems occur with this mod
+issueTrackerURL="https://github.com/FaeWulf/item-rename/issues" #optional
+
+# A list of mods
+[[mods]]
+
+# The modid of the mod
+modId="itemrename" #mandatory
+
+# The version number of the mod
+version="1.3.2+26.3" #mandatory
+
+# A display name for the mod
+displayName="Item Rename" #mandatory
+
+# A URL for the "homepage" for the mod, displayed in the mod UI
+displayURL="https://faewulf.xyz/" #optional
+
+# A file name (in the root of the mod JAR) containing a logo for display
+logoFile="icon.png" #optional
+
+# The authors of the mod, displayed in the mod UI (optional)
+authors="Faewulf"
+
+# The description text for the mod (multi line!) (#mandatory)
+description='''
+Allows players to edit various properties of items in the game, such as their name, lore, and enchantment glow. With support for color and formatting
+'''
+
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.itemrename]]
+    # the modid of the dependency
+    modId="neoforge" #mandatory
+    # The type of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case insensitive).
+    type="required" #mandatory
+    # The version range of the dependency
+    versionRange="[26.3.0.69-beta,)" #mandatory
+    # An ordering relationship for the dependency.
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT, or SERVER
+    side="BOTH"
+
+[[dependencies.itemrename]]
+    modId="minecraft"
+    type="required"
+    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[26.3, 26.4)"
+    ordering="NONE"
+    side="BOTH"
