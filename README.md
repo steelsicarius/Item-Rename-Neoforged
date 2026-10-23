@@ -1,3 +1,5 @@
+Unoficial Neoforge Fork from FaeWulf/item-rename
+
 # Item Rename Mod (NeoForge)
 
 ## Description
